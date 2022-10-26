@@ -1,11 +1,9 @@
 <template>
-
   <div id="Candidatos-container">
     <CardCandidato v-for="candidato in candidatos" :key="candidato.id" :candidato="candidato" :class="candidato-card"></CardCandidato>
     <div class="createCard" @click="clickCard(id)">
     </div>
   </div>
-
 </template>
   
 <script>
@@ -63,4 +61,3 @@ a {
   color: #42b983;
 }
 </style>
-  
