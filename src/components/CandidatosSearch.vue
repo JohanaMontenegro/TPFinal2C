@@ -1,7 +1,6 @@
 <template>
     <div id="CSDivContainer">
 
-
         <p>Busqueda por:</p>
         <input id="SName" type="text" placeholder="Nombre" />
         <input id="SApellido" type="text" placeholder="Apellido" />
@@ -21,9 +20,7 @@
         <li>Si</li>
         <li>No</li>
 
-
     </div>
-
 
 </template>
     

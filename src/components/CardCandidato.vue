@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="ccard">
     <img v-bind:src="candidato.avatar" alt="avatar">
     <h3 class="name">{{candidato.name}}</h3>
     <h2 class="surname">{{candidato.surname}}</h2>
@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style>
-.card {
+.ccard {
   display: flex;
   flex-flow: column;
   justify-content: center;
@@ -43,32 +43,33 @@ export default {
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
     0 0px 1px 0 rgba(0, 0, 0, 0.19);
   border: 1px solid rgb(189, 189, 189);
+  max-width: 200px;
 }
 
-img {
+.ccard img {
   width: auto;
   height: auto;
   margin: 5px;
   margin-bottom: 10px;
 }
 
-.card h3,
-h2,
-p {
+.ccard h3,
+.ccard h2,
+.ccard p {
   margin: 0px
 }
 
-.card h2 {
+.ccard h2 {
   margin-bottom: 10px;
   color: rgb(36, 36, 36);
 }
 
-.card h3 {
+.ccard h3 {
   font-weight: 300;
   color: rgb(58, 58, 58);
 }
 
-.card p {
+.ccard p {
   margin-bottom: 4px;
 }
 
@@ -76,13 +77,13 @@ p {
   margin-top: 5px;
 }
 
-.card a{
+.ccard a{
   text-decoration: none;
   color: inherit;
   color:black;
 }
 
-.card a:hover{
+.ccard a:hover{
   cursor: pointer;
   text-decoration: underline;
 }

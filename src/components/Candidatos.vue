@@ -20,8 +20,8 @@ export default {
     return { candidatos: [] }
   },
 
-  created() {
-    fetch("https://6350867b3e9fa1244e4813ff.mockapi.io/candidatos/v1/candidatos")
+  async created() {
+    return fetch("https://6350867b3e9fa1244e4813ff.mockapi.io/candidatos/v1/candidatos")
       .then((response) => response.json())
       .then((persona) => {
         this.candidatos = persona
@@ -42,11 +42,6 @@ export default {
   padding-top: 25px;
 }
 
-.card{
-  max-width: 200px;
-}
-
-
 ul {
   list-style-type: none;
   padding: 0;
@@ -60,4 +55,8 @@ li {
 a {
   color: #42b983;
 }
+
+/* CARD CANDIDATOS */
+
+
 </style>
