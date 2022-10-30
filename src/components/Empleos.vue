@@ -1,29 +1,91 @@
 <template>
+  <EmpleosSearchComponent @searchByFT="searchByFT($event)" @searchByRubro="searchByRubro($event)"
+  @restartSearch="restartSearch($event)" :resetEBtn=this.resetEBtn >
+  </EmpleosSearchComponent>
   <div id="Empleos-container">
-    <EmpleosCard v-for="empleo in empleos" :key="empleo.id" :empleo="empleo"></EmpleosCard>
+    <EmpleosCard v-for="empleo in empleosListFiltered" :key="empleo.id" :empleo="empleo"></EmpleosCard>
   </div>
 </template>
 
 <script>
-import EmpleosCard from "./EmpleosCard.vue"
+import EmpleosCard from "./EmpleosCard.vue";
+import EmpleosSearchComponent from "./EmpleosSearch.vue";
+
 export default {
   name: 'EmpleosComponent',
   props: {
-    msg: String
+    msg: String,
+
   },
-  components: { EmpleosCard },
+  components: { EmpleosCard, EmpleosSearchComponent },
 
   data() {
-    return { empleos: [] }
+    return {
+      empleosList: [],
+      empleosListFiltered: [],
+      resetEBtn: false,
+    }
+  },
+  methods: {
+
+    loadList() {
+      fetch("https://6351b70e9d64d7c71307422e.mockapi.io/empleos/empleos")
+        .then((response) => response.json())
+        .then((trabajo) => {
+          this.empleosList = trabajo
+          this.empleosListFiltered = this.empleosList
+        });
+    },
+    searchByFT(boolean) {
+
+      this.empleosListFiltered = [];
+      this.resetEBtn = true;
+      if (boolean == true) {
+        this.empleosList.forEach(empleo => {
+          if (empleo.workinghours === "Full-Time") {
+            this.empleosListFiltered.push(empleo);
+          }
+
+        });
+      } else {
+        this.empleosList.forEach(empleo => {
+          if (empleo.workinghours === "Part-Time") {
+            this.empleosListFiltered.push(empleo);
+          }
+
+        });
+      }
+
+    },
+
+    searchByRubro(Rubro) {
+      this.resetEBtn = true;
+
+      Rubro = Rubro.toLowerCase();
+      this.empleosListFiltered = []
+      console.log(Rubro)
+
+      this.empleosList.forEach(empleo => {
+       
+        if((empleo.item.toLowerCase()) == Rubro){
+          this.empleosListFiltered.push(empleo)
+          console.log(empleo)
+        }
+
+      });
+
+      console.log(this.empleosListFiltered)
+    },
+
+    restartSearch(){
+      this.empleosListFiltered = this.empleosList
+      this.resetEBtn = false;
+    }
+
   },
 
   created() {
-    fetch("https://6351b70e9d64d7c71307422e.mockapi.io/empleos/empleos")
-      .then((response) => response.json())
-      .then((trabajo) => {
-        this.empleos = trabajo
-        console.log(this.empleos)
-      });
+    this.loadList();
   }
 }
 </script>

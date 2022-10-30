@@ -1,66 +1,35 @@
 <template>
     <div id="ESDivContainer">
-
-
-
         <p>Filtrar por:</p>
         <ul>Carga Horaria:</ul>
-        <li>Full-Time</li>
-        <li>Part-Time</li>
+        <li v-on:click="this.$emit('searchByFT',true)" >Full-Time</li>
+        <li v-on:click="this.$emit('searchByFT',false)" >Part-Time</li>
 
         <ul>Rubro:</ul>
-        <li v-for="empleo in empleosrubros" :key="empleo.id" >{{ empleo }}</li>
+        <li v-for="empleo in empleosrubros" :key="empleo.id" 
+        v-on:click="this.$emit('searchByRubro', empleo)">{{ empleo }}</li>
 
-
+        <p v-if="resetEBtn" v-on:click="this.$emit('restartSearch')" id="p-restart-eSearch">Reestablecer </p>
     </div>
-
-
 </template>
     
 <script>
 export default {
     name: 'EmpleosSearchComponent',
     props: {
-
+        resetEBtn: Boolean,
     },
     data() {
     return { empleos:[],
-        empleosft: [],
-        empleospt: [],
         empleosrubros:[]
     }
     },
     methods: {
-
-        empleosFullTime(){
-            this.empleos.forEach(empleo => {
-                if (empleo.workinghours === "Full-Time"){
-                    this.empleosft.push(empleo);
-                }
-                
-            });
-            console.log("Empleos Full-Time")
-            console.log(this.empleosft)
-        },
-        empleosPartTime(){
-            this.empleos.forEach(empleo => {
-                if (empleo.workinghours === "Part-Time"){
-                    this.empleospt.push(empleo);
-                }
-                
-            });
-            console.log("Empleos Part-Time")
-            console.log(this.empleospt)
-        },
         empleosAllRubros(){
             this.empleos.forEach(empleo => {
                 this.empleosrubros.push(empleo.item)
             });
-            console.log("Empleos Rubros")
-            console.log(this.empleosrubros)
         }
-
-
     },
 
     async created() {
@@ -68,8 +37,6 @@ export default {
         .then((response) => response.json())
         .then((trabajo) => {
             this.empleos = trabajo
-            this.empleosFullTime();
-            this.empleosPartTime();
             this.empleosAllRubros();
         });
     }
@@ -117,6 +84,17 @@ input {
     background-color: white;
     margin-bottom: 10px;
 }
+
+#p-restart-eSearch {
+    color: grey;
+}
+
+#p-restart-eSearch:hover {
+    color: rgb(135, 135, 135);
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 
 </style>
     

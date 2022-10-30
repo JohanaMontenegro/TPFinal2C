@@ -1,6 +1,5 @@
 <template>
   <div id="CDivContainer">
-    <CandidatosSearchComponent />
     <CandidatosComponent />
   </div>
 </template>
@@ -9,13 +8,11 @@
 
 <script>
 import CandidatosComponent from "../components/Candidatos.vue";
-import CandidatosSearchComponent from "../components/CandidatosSearch.vue";
 
 export default {
   name: "CandiComponent",
   components: {
-    CandidatosComponent,
-    CandidatosSearchComponent
+    CandidatosComponent
   },
 }
 
