@@ -9,8 +9,6 @@
   <div  id="Candidatos-container">
     <CardCandidato v-for="candidato in listFiltered" :key="candidato.id" :candidato="candidato">
     </CardCandidato>
-    <div class="createCard" @click="clickCard(id)">
-    </div>
   </div>
 
 
